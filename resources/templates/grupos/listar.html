@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html >
+
+<meta charset="UTF-8">
+
+<body>
+	<div th:replace="layout"></div>
+	
+<div class="container">
+		<div th:fragment="content">
+			<div class="alert alert-primary" th:if="${#lists.isEmpty(listarGrupos)}">
+				Nenhum Grupo Cadastrado</div>
+			<div class="alert alert-primary" th:if="${mensagem != null}"
+				th:text="${mensagem}"></div>
+
+			<div class="card mb-3">
+				
+			</div>
+
+			<div th:if="${not #lists.isEmpty(listarGrupos)}">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Nº do Grupo </th>
+						    <th>Tecnologia</th>
+							<th>Scrum Master</th>
+							<th>Modulo</th>
+							<th>Opções</th>
+							
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="grupos : ${listarGrupos}">
+							<td th:text="${grupos.nomeGrupo}"></td>
+							<td th:text="${grupos.tecnologia.nomeTecnologia}"></td>
+							<td th:text="${grupos.scrumMaster.nome}"></td>
+							<td th:text="${grupos.modulo.nomeModulo}"></td>
+							
+							<td><a class="btn btn-warning btn-sm"
+								th:href="@{/grupo/editar(id=${grupos.id})}">Editar</a>
+								<a class="btn btn-danger btn-sm" th:data-bs-toggle="modal"
+								th:data-bs-target="|#myModal${grupos.id}|"
+								th:href="@{/grupo/excluir(id=${grupos.id})}">Excluir</a>
+
+								<div aria-hidden="true" aria-labelledby="myModalLabel"
+									class="modal fade" th:id="|myModal${grupos.id}|"
+									tabindex="-1">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="myModalLabel">Excluir</h5>
+												<button aria-label="Close" class="btn-close"
+													data-bs-dismiss="modal" type="button"></button>
+											</div>
+											<div class="modal-body">Ao excluir você perderá todo histórico.Deseja continuar?
+												</div>
+											<div class="modal-footer">
+												<button class="btn btn-secondary" data-bs-dismiss="modal"
+													type="button">Cancelar</button>
+												<a class="btn btn-danger" type="button"
+													th:href="@{/grupo/excluir(id=${grupos.id})}">Confirmar</a>
+											</div>
+										</div>
+									</div>
+								</div></td>
+						</tr>
+					</tbody>
+
+				</table>
+			</div>
+		</div>
+
+
+	</div>
+
+	
+</body>
+
+</html>
+

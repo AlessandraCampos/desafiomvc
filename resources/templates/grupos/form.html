@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<body>
+	<div th:replace="layout"></div>
+	<div class="container">
+	<div  th:fragment="content">
+	<div class= "alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}">
+	Nenhum Grupo Encontrado!
+	</div>
+ <div>
+ <div>
+
+ 
+ 
+
+ <div class="card">
+			
+			
+			<div class="card bg-light mb-3" style="max-width: 75rem;">
+            <div class="card-header">Cadastro de Grupos </div>
+             <div class="card-body">
+              <h5 class="card-title">Preencha as Informações para cadastro </h5>
+             
+             </div>
+			<div class="card-body">
+			
+				<form method="POST" th:object ="${grupo}" th:action="@{/grupo/editar}">
+				<input type= "hidden" th:field="*{id}">
+					<div class="form-group mb-3">
+						<label for="grupo">Nome Grupo  :</label> 
+						<input
+							class="form-control" type="text" th:field="*{nomeGrupo}" required></input>
+							<div class="text-danger" th:if="${#fields.hasErrors('nomeGrupo')}"
+								th:errors="*{nomeGrupo}"></div>
+						</div>
+										
+                                    
+	                  <div class="form-group mb-3">
+						<label for="Tecnologia">Tecnologia :</label> 
+						<select class="form-select" th:field ="*{Tecnologia}" >
+						<option th:each="Tecnologia: ${listaTecnologia}" th:value="${Tecnologia.id}" th:text="${Tecnologia.nomeTecnologia}"/>
+						</select>
+						
+					  </div>
+					  
+					  <div class="form-group mb-3">
+						<label for="Modulo">Módulo :</label> 
+						<select class="form-select" th:field ="*{Modulo}" >
+						<option th:each="Modulo: ${listaModulo}" th:value="${Modulo.id}" th:text="${Modulo.nomeModulo}"/>
+						</select>
+						
+					  </div>
+					 
+					 
+					   <div class="form-group mb-3">
+						<label for="ScrumMaster">Scrum :</label> 
+						<select class="form-select" th:field ="*{ScrumMaster}" >
+						<option th:each="ScrumMaster: ${listaScrum}" th:value="${ScrumMaster.id}" th:text="${ScrumMaster.nome}"/>
+						</select>
+						
+					  </div>
+					  
+
+		
+										                                    
+	
+				<button type="submit" class="btn btn-success">Salvar Grupo</button>
+				<button type="button"  class="btn btn-secondary" onclick="window.history.back();">Cancel</button>
+					
+				</form>	
+			</div>
+		</div>
+
+	 
+ </div>
+
+
+
+
+	</div>
+
+</div>	
+
+</body>
+</html>

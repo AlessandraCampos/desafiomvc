@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<meta charset="UTF-8">
+
+<body>
+	<div th:replace="layout"></div>
+
+	<div class="container">
+		<div th:fragment="content">
+			<div class="alert alert-primary"
+				th:if="${#lists.isEmpty(listarAvaliacao)}">Nenhuma Avaliação 
+				Cadastrada</div>
+			<div class="alert alert-primary" th:if="${mensagem != null}"
+				th:text="${mensagem}"></div>
+
+			<div class="card mb-3">
+				
+				
+			</div>
+
+			<div th:if="${not #lists.isEmpty(listarAvaliacao)}">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Starter</th>
+							<th>Modulo</th>
+							<th>Nota de Avaliação</th>
+							<th>Opções</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="avaliacao : ${listarAvaliacao}">
+							<td th:text="${avaliacao.id}"></td>
+							<td th:text="${avaliacao.starter.nome}"></td>
+							<td th:text="${avaliacao.modulo.nomeModulo}"></td>
+							<td th:text="${avaliacao.notaDeAvaliacao}"></td>
+						   
+
+
+
+
+							<td><a class="btn btn-warning"
+								th:href="@{/avaliacao/editar(id=${avaliacao.id})}">Editar</a> <a
+								class="btn btn-danger btn-sm" th:data-bs-toggle="modal"
+								th:data-bs-target="|#myModal${avaliacao.id}|"
+								th:href="@{/avaliacao/excluir(id=${avaliacao.id})}">Excluir</a>
+
+								<div aria-hidden="true" aria-labelledby="myModalLabel"
+									class="modal fade" th:id="|myModal${avaliacao.id}|" tabindex="-1">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="myModalLabel">Excluir</h5>
+												<button aria-label="Close" class="btn-close"
+													data-bs-dismiss="modal" type="button"></button>
+											</div>
+											<div class="modal-body">Ao excluir você perderá todo histórico.Deseja continuar?</div>
+											<div class="modal-footer">
+												<button class="btn btn-secondary" data-bs-dismiss="modal"
+													type="button">Cancelar</button>
+												<a class="btn btn-danger" type="button"
+													th:href="@{/avaliacao/excluir(id=${avaliacao.id})}">Confirmar</a>
+											</div>
+										</div>
+									</div>
+								</div></td>
+
+							
+						</tr>
+					</tbody>
+				</table>
+			
+		</div>
+
+
+	</div>
+
+
+</body>
+
+</html>
+

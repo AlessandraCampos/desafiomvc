@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<body>
+	<div th:replace="layout"></div>
+	<div class="container">
+		<div th:fragment="content">
+			<div class="alert alert-primary" th:if="${mensagem != null}"
+				th:text="${mensagem}">Nenhuma Avaliação Encontrada!</div>
+
+			<div>
+
+
+
+
+				<div class="card" style="max-width: 55rem;">
+
+
+					<div class="card bg-light mb-3" style="max-width: 55rem;">
+						<div class="card-header">Gerar Avaliação</div>
+						<div class="card-body">
+							<h5 class="card-title">Preencha as Informações</h5>
+
+						</div>
+						<div class="card-body">
+
+							<form method="POST" th:object="${avaliacao}"
+								th:action="@{/avaliacao/editar}">
+								<input type="hidden" th:field="*{id}">
+								
+								<div class="form-group mb-3">
+									<label for="nome">Selecione o Starter :</label> <select
+										class="form-select" th:field="*{Starter}">
+										<option th:each="Starter: ${listaStarter}"
+											th:value="${Starter.id}" th:text="${Starter.nome}" />
+									</select>
+									<div class="text-danger" th:if="${#fields.hasErrors('id')}"
+										th:errors="*{id}"></div>
+								
+								
+								 <div class="form-group mb-3">
+									<label for="Modulo">Selecione o Módulo :</label> <select
+										class="form-select" th:field="*{Modulo}">
+										<option th:each="Modulo: ${listaModulo}"
+											th:value="${Modulo.id}" th:text="${Modulo.nomeModulo}" />
+									</select>
+									<div class="text-danger" th:if="${#fields.hasErrors('id')}"
+										th:errors="*{id}"></div>
+								
+								
+								</div>
+
+                                 <div class="form-group mb-3">
+									<label for="observacao"> Observação :</label> <input
+										class="form-control" type="text" name="observacao"
+										th:value="${observacao}"></input>
+
+								</div>
+	
+
+								</div>
+
+								<div class="form-group mb-3">
+									<label for="notaDeAvaliacao"> Nota de Avaliação :</label> <input
+										class="form-control" type="text" name="notaDeAvaliacao"
+										th:value="${notaDeAvaliacao}"></input>
+
+								</div>
+
+
+								<button type="submit" class="btn btn-success">Salvar
+									Avaliação</button>
+									
+									<button type="button"  class="btn btn-secondary" onclick="window.history.back();">Cancel</button>
+					
+							</form>
+						</div>
+					</div>
+
+
+
+
+
+
+
+				</div>
+
+			</div>
+</body>
+</html>

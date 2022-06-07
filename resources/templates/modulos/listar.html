@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<meta charset="UTF-8">
+
+<body>
+	<div th:replace="layout"></div>
+
+	<div class="container">
+		<div th:fragment="content">
+			<div class="alert alert-primary"
+				th:if="${#lists.isEmpty(listarModulo)}">Nenhum Módulo
+				Cadastrado</div>
+			<div class="alert alert-primary" th:if="${mensagem != null}"
+				th:text="${mensagem}"></div>
+
+			<div class="card mb-3">
+				
+			
+			</div>
+
+			<div th:if="${not #lists.isEmpty(listarModulo)}">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nome do Módulo</th>
+							<th>Projeto</th>
+							<th>Avaliação/Nota</th>
+							<th>Opções</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="modulo : ${listarModulo}">
+							<td th:text="${modulo.id}"></td>
+							<td th:text="${modulo.nomeModulo}"></td>
+							<td th:text="${modulo.projeto}"></td>
+						    <td><a class="btn btn-secondary"  >Detalhes</a>
+
+
+
+
+							<td><a class="btn btn-warning btn-sm"
+								th:href="@{/modulos/editar(id=${modulo.id})}">Editar</a> <a
+								class="btn btn-danger btn-sm" th:data-bs-toggle="modal"
+								th:data-bs-target="|#myModal${modulo.id}|"
+								th:href="@{/modulo/excluir(id=${modulo.id})}">Excluir</a>
+
+								<div aria-hidden="true" aria-labelledby="myModalLabel"
+									class="modal fade" th:id="|myModal${modulo.id}|" tabindex="-1">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="myModalLabel">Excluir</h5>
+												<button aria-label="Close" class="btn-close"
+													data-bs-dismiss="modal" type="button"></button>
+											</div>
+											<div class="modal-body">Ao excluir você perderá todo histórico.Deseja continuar?</div>
+											<div class="modal-footer">
+												<button class="btn btn-secondary" data-bs-dismiss="modal"
+													type="button">Cancelar</button>
+												<a class="btn btn-danger" type="button"
+													th:href="@{/modulos/excluir(id=${modulo.id})}">Confirmar</a>
+											</div>
+										</div>
+									</div>
+								</div></td>
+</div>
+							
+						</tr>
+					</tbody>
+				</table>
+			
+		</div>
+
+
+	</div>
+
+
+</body>
+
+</html>
+

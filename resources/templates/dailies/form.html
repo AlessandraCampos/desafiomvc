@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<body>
+	<div th:replace="layout"></div>
+	<div class="container">
+		<div th:fragment="content">
+			<div class="alert alert-primary" th:if="${mensagem != null}"
+				th:text="${mensagem}">Nenhuma Daily Encontrada!</div>
+
+			<div>
+
+
+
+
+				<div class="card" style="max-width: 55rem;">
+
+
+					<div class="card bg-light mb-3" style="max-width: 55rem;">
+						<div class="card-header">Cadastro de Daily</div>
+						<div class="card-body">
+							<h5 class="card-title">Preencha as Informações</h5>
+
+						</div>
+						<div class="card-body">
+
+							<form method="POST" th:object="${daily}"
+								th:action="@{/daily/editar}">
+								<input type="hidden" th:field="*{id}">
+								<div class="form-group mb-3">
+									<label for="data">Data :</label> <input class="form-control"
+										type="date" th:field="*{data}" required></input>
+									<div class="text-danger" th:if="${#fields.hasErrors('data')}"
+										th:errors="*{data}"></div>
+								</div>
+
+								<div class="form-group mb-3">
+									<label for="nome">Selecione o Starter :</label> <select
+										class="form-select" th:field="*{Starter}">
+										<option th:each="Starter: ${listaStarter}"
+											th:value="${Starter.id}" th:text="${Starter.nome}" />
+									</select>
+									<div class="text-danger" th:if="${#fields.hasErrors('id')}"
+										th:errors="*{id}"></div>
+								</div>
+
+								<div class="form-group mb-3">
+									<label for="Modulo">Selecione o Módulo :</label> <select
+										class="form-select" th:field="*{Modulo}">
+										<option th:each="Modulo: ${listaModulo}"
+											th:value="${Modulo.id}" th:text="${Modulo.nomeModulo}" />
+									</select>
+									<div class="text-danger" th:if="${#fields.hasErrors('id')}"
+										th:errors="*{id}"></div>
+								</div>
+								<p>O Starter está presente?</p>
+
+								<div class="form-group required-control">
+									<label for="sim">SIM</label> <input id="sim" type="checkbox"
+										name="sim" th:checked="*{sim}" /> <label for="nao">NÂO</label>
+									<input id="nao" type="checkbox" name="nao" th:checked="*{nao}" />
+								</div>
+								<br>
+
+
+
+								<div class="form-group mb-3">
+									<label for="status">Status do Projeto :</label> <select
+										class="form-select" th:field="*{status}">
+										<option th:each="status: ${listaStatus}"
+											th:value="${status.id}" th:text="${status.status}" />
+									</select>
+
+								</div>
+								<div class="form-group mb-3">
+									<label for="impedimentos"> Impedimentos :</label> <input
+										class="form-control" type="text" name="impedimentos"
+										th:value="${impedimentos}"></input>
+
+								</div>
+
+								<div class="form-group mb-3">
+									<label for="observacao"> Observação :</label> <input
+										class="form-control" type="text" name="observacao"
+										th:value="${observacao}"></input>
+
+								</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+								<button type="submit" class="btn btn-success">Salvar
+									Daily</button>
+							</form>
+						</div>
+					</div>
+
+
+
+
+
+
+
+				</div>
+
+			</div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html >
+
+<meta charset="UTF-8">
+
+<body>
+	<div th:replace="layout"></div>
+	
+<div class="container">
+		<div th:fragment="content">
+			<div class="alert alert-primary" th:if="${#lists.isEmpty(listarProgramas)}">
+				Nenhum Programa Cadastrado</div>
+			<div class="alert alert-primary" th:if="${mensagem != null}"
+				th:text="${mensagem}"></div>
+
+			<div class="card mb-3">
+				<div class="class-header">
+		
+					</form>
+				</div>
+			</div>
+
+			<div th:if="${not #lists.isEmpty(listarProgramas)}">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Id</th>
+							<th>Nome do Programa</th>
+							<th>Data Inicial</th>
+							<th>Data Final</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="programas : ${listarProgramas}">
+							<td th:text="${programas.id}"></td>
+							<td th:text="${programas.nomePrograma}"></td>
+							<td th:text="${programas.dataInicial}"></td>
+							<td th:text="${programas.dataFinal}"></td>
+							
+							
+							<td><a class="btn btn-warning btn-sm"
+								th:href="@{/programas/editar(id=${programas.id})}">Editar</a>
+								<a class="btn btn-danger btn-sm" th:data-bs-toggle="modal"
+								th:data-bs-target="|#myModal${programas.id}|"
+								th:href="@{/programas/excluir(id=${programas.id})}">Excluir</a>
+
+								<div aria-hidden="true" aria-labelledby="myModalLabel"
+									class="modal fade" th:id="|myModal${programas.id}|"
+									tabindex="-1">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="myModalLabel">Excluir</h5>
+												<button aria-label="Close" class="btn-close"
+													data-bs-dismiss="modal" type="button"></button>
+											</div>
+											<div class="modal-body">Deseja excluir este
+												Programa Start?</div>
+											<div class="modal-footer">
+												<button class="btn btn-secondary" data-bs-dismiss="modal"
+													type="button">Cancelar</button>
+												<a class="btn btn-danger" type="button"
+													th:href="@{/programas/excluir(id=${programas.id})}">Confirmar</a>
+											</div>
+										</div>
+									</div>
+								</div></td>
+						</tr>
+
+
+
+
+
+
+					</tbody>
+
+
+
+
+				</table>
+			</div>
+		</div>
+
+
+	</div>
+
+	
+</body>
+
+</html>
+

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<body>
+	<div th:replace="layout"></div>
+	<div class="container">
+	<div  th:fragment="content">
+	<div class= "alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}">
+	Nenhum Scrum Master Encontrado!
+	</div>
+
+ <div>
+
+ 
+ 
+
+ <div class="card">
+			
+			
+			<div class="card bg-light mb-3" style= "max-width: 75rem;">
+            <div class="card-header">Cadastro de Scrum Master </div>
+             <div class="card-body">
+              <h5 class="card-title">Preencha as Informações</h5>
+             </div>
+			<div class="card-body">
+			
+				<form method="POST" th:object ="${scrumMaster}" th:action="@{/scrum/editar}">
+				<input type= "hidden" th:field="*{id}">
+					<div class="form-group mb-3">
+						<label for="nome"> Nome :</label> 
+						<input
+							class="form-control" type="text" th:field="*{nome}" required></input>
+							<div class="text-danger" th:if="${#fields.hasErrors('nome')}"
+								th:errors="*{nome}"></div>
+						</div>
+						
+						
+					
+					
+				
+
+					
+					<div>
+				
+					
+										                                    
+	
+				<button type="submit" class="btn btn-success">Salvar Scrum Master</button>
+				<button type="button"  class="btn btn-secondary" onclick="window.history.back();">Cancel</button>
+				
+				</form>	
+			</div>
+		</div>
+
+	 
+
+
+
+
+
+	</div>
+
+ </div>   
+
+</body>
+</html>

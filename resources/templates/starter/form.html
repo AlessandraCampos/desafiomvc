@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<body>
+	<div th:replace="layout"></div>
+	<div class="container">
+		<div th:fragment="content">
+			<div class="alert alert-primary" th:if="${mensagem != null}"
+				th:text="${mensagem}">Nenhum Starter Encontrado!</div>
+
+			<div>
+
+
+
+
+				<div class="card" style="max-width: 55rem;">
+
+
+					<div class="card bg-light mb-3" style="max-width: 55rem;">
+						<div class="card-header">Cadastro de Starter</div>
+						<div class="card-body">
+							<h5 class="card-title">Preencha as Informações</h5>
+						</div>
+						<div class="card-body">
+
+							<form method="POST" th:object="${starter}"
+								th:action="@{/starter/editar}">
+								<input type="hidden" th:field="*{id}">
+								<div class="form-group mb-3">
+									<label for="nome"> Nome :</label> <input class="form-control"
+										type="text" th:field="*{nome}" required></input>
+									<div class="text-danger" th:if="${#fields.hasErrors('nome')}"
+										th:errors="*{nome}"></div>
+								</div>
+								<div class="form-group mb-3">
+									<label for="quatroLetras"> Quatro Letras :</label> <input
+										class="form-control" type="text" th:field="*{quatroLetras}"
+										maxlength="4" required></input>
+									<div class="text-danger"
+										th:if="${#fields.hasErrors('quatroLetras')}"
+										th:errors="*{quatroLetras}"></div>
+								</div>
+
+
+								<div class="form-group mb-3">
+									<label for="Programa">Programa Starter :</label> <select
+										class="form-select" th:field="*{ProgramaStart}" required>>
+										<option th:each="Programa: ${listaProgramas}"
+											th:value="${Programa.id}" th:text="${Programa.nomePrograma}" />
+									</select>
+
+								</div>
+
+
+
+
+								<div class="form-group mb-3">
+									<label for="nome">Selecione o Grupo :</label> <select
+										class="form-select" th:field="*{Grupo}"required>>
+										<option th:each="Grupo: ${listaGrupos}" th:value="${Grupo.id}"
+											th:text="${Grupo.nomeGrupo}" />
+									</select>
+									<div class="text-danger"
+										th:if="${#fields.hasErrors('Grupo.nomeGrupo')}"
+										th:errors="*{Grupo.nomeGrupo}"></div>
+								</div>
+
+								<div>
+
+									<div class="card" style="width: 18rem;">
+										<img id="imagemrec" class="card-img-top" for="imagemrec"
+											style="width: 150px; height: 150px;" alt="Foto do Starter"
+											src="">
+										<div class="card-body"></div>
+										<br>
+
+										<div class="text-danger"
+											th:if="${#fields.hasErrors('imagem')}" th:errors="*{imagem}"></div>
+									</div>
+									<br>
+									<p>Cole a URL da imagem abaixo :</p>
+									<input class="form-control" type="text" th:field="*{imagem}"
+										id='imagemsrc' onchange="loadimagem()" ></input>
+
+								</div><br>
+
+
+
+								<button type="submit" class="btn btn-success">Salvar
+									Starter</button>
+								<button type="button"  class="btn btn-secondary" onclick="window.history.back();">Cancel</button>
+							</form>
+						</div>
+					</div>
+
+
+
+
+
+
+
+				</div>
+
+			</div>
+</body>
+</html>

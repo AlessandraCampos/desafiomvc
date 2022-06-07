@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<body>
+	<div th:replace="layout"></div>
+	<div class="container">
+		<div th:fragment="content">
+			<div class="alert alert-primary" th:if="${mensagem != null}"
+				th:text="${mensagem}">Nenhuma Tecnologia Encontrada!</div>
+			<div>
+				<div>
+
+
+
+
+					<div class="card" style="max-width: 65rem;">
+
+
+						<div class="card bg-light mb-3"
+							style="max-width: 65rem;">
+							<div class="card-header">Cadastro de Tecnologia</div>
+							<div class="card-body">
+								<h5 class="card-title">Preencha os dados da Tecnologia</h5>
+						</div>
+							<div class="card-body">
+
+								<form method="POST" th:object="${tecnologia}"
+									th:action="@{/tecnologia/editar}">
+									<input type="hidden" th:field="*{id}">
+									<div class="form-group mb-3">
+										<label for="nomeTecnologia"> Nome da Tecnologia:</label> <input
+											class="form-control" type="text" th:field="*{nomeTecnologia}"
+											required></input>
+										<div class="text-danger"
+											th:if="${#fields.hasErrors('nomeTecnologia')}"
+											th:errors="*{nomeTecnologia}"></div>
+									</div>
+									<div class="form-group mb-3">
+										<label for="descricao"> Descrição :</label> <input
+											class="form-control" type="text" th:field="*{descricao}"></input>
+										<div class="text-danger"
+											th:if="${#fields.hasErrors('descricao')}"
+											th:errors="*{descricao}"></div>
+									</div>
+
+
+
+									<button type="submit" class="btn btn-success">Salvar
+										Tecnologia</button>
+							</form>
+							
+							</div>
+						</div>
+
+
+					</div>
+
+
+
+
+				</div>
+
+			</div>
+</body>
+</html>
